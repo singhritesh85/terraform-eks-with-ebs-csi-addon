@@ -258,4 +258,9 @@ resource "aws_eks_addon" "ebs_csi_driver" {
   addon_version     = var.ebs_csi_version
   service_account_role_arn = aws_iam_role.eks_ebs_csi_driver.arn
   resolve_conflicts_on_create = "OVERWRITE"     # use resolve_conflicts_on_update for updating a kubernetes cluster  #resolve_conflicts = "OVERWRITE"
+
+  depends_on = [
+    aws_eks_cluster.eksdemo,
+    aws_eks_node_group.eksnode
+  ]
 }
